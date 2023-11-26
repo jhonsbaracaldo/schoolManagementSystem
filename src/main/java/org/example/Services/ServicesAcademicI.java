@@ -1,7 +1,7 @@
 package org.example.Services;
 
-import org.example.Entity.Course;
-import org.example.Entity.Student;
+import org.example.Domain.Entity.Course;
+import org.example.Domain.Entity.Student;
 
 public interface ServicesAcademicI {
 

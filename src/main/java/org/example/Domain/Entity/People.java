@@ -1,32 +1,27 @@
-package org.example.Entity;
+package org.example.Domain.Entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
 public class People {
-
-
-
-
-
         private Integer id;
         private String name;
         private String lastname;
-        private LocalDate birtday ;
+        private LocalDate birthday ;
 
-    public LocalDate getBirtday() {
-        return birtday;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setBirtday(LocalDate birtday) {
-        this.birtday = birtday;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     public People() {
         }
 
-        public People(Integer id, String name, String lastname,LocalDate birtday) {
+        public People(Integer id, String name, String lastname,LocalDate birthday) {
             this.id = id;
             this.name = name;
             this.lastname = lastname;
