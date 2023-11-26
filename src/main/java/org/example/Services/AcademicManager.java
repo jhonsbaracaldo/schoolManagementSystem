@@ -1,9 +1,10 @@
 package org.example.Services;
 
-import org.example.Entity.Course;
-import org.example.Entity.Student;
-import org.example.Enums.Status;
-import org.example.Exeception.StudentReader;
+import org.example.Domain.Entity.Course;
+import org.example.Domain.Entity.Student;
+import org.example.Dto.Enums.Status;
+import org.example.Exeception.StudentAlreadyEnrolledException;
+import org.example.Exeception.StudentNotEnrolledInCourseException;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -27,10 +28,13 @@ public class AcademicManager implements ServicesAcademicI {
             student.setName(print.next());
             System.out.print("Enter your lastname: ");
             student.setLastname(print.next());
-            System.out.print("Enter your birthday YYYY-MM-DD ");
-            String dateOfBirthString = print.next();
+           student.setBirthday(null) ;
+           try {
+               System.out.print("Enter your birthday YYYY-MM-DD ");
+               String dateOfBirthString = print.next();
             LocalDate birthday = LocalDate.parse(dateOfBirthString);
-            student.setBirtday(birthday);
+            student.setBirthday(birthday);
+            } catch (Exception e) {}
             System.out.print("Write the status:\n");
             for (Status e : Status.values()) {
                 System.out.println("* " + e.name());
@@ -41,11 +45,10 @@ public class AcademicManager implements ServicesAcademicI {
             if (Search.isPresent()) {
                 System.out.println("The student is enrolled");
             } else {
-                students.add(new Student(student.getId(), student.getName(), student.getLastname(), birthday, student.getStatus()));
+                students.add(new Student(student.getId(), student.getName(), student.getLastname(),student.getBirthday(), student.getStatus()));
                 System.out.println("Successful registration\n" + "Studen\n" + students);
                 throw new Exception("was not registered has been added ");
             }
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -70,78 +73,66 @@ public class AcademicManager implements ServicesAcademicI {
             if (Search.isPresent()) {
                 System.out.println("the courses already exist");
             } else {
-
                 courses.add((new Course(course.getId(), course.getName(), course.getDescription(), course.getNumCredits(), course.getVersion())));
                 throw new Exception("The course is not in the list, it was added successfully");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-
         System.out.println(course.toString());
     }
 
     @Override
     public void enrollStudentCourse(Student student, Course course) {
-
-
-
-
-
-        System.out.println("Ingrese el ID del estudiante: ");
-        student.setId(print.nextInt());
-
-        System.out.println("Ingrese el ID del curso: ");
-        course.setId(print.nextInt());
-
-        if (StudentandoCours.containsKey(student.getId())) {
-            System.out.println("El estudiante ya esta inscrito");
-
-        } else {
-            List<Course> enrolledCourses = StudentandoCours.getOrDefault(student.getId(), new ArrayList<>());
-            enrolledCourses.add(course);
-            StudentandoCours.put(student.getId(), enrolledCourses);
-            System.out.println(StudentandoCours);
-            System.out.println(" no esta inscrito en ningun curso");
-            System.out.println("Estudiante inscrito en el curso exitosamente.");
-
-
+        try {
+            System.out.println("Enter Student ID: ");
+            student.setId(print.nextInt());
+            System.out.println("Enter Course ID:  ");
+            course.setId(print.nextInt());
+            if (StudentandoCours.containsKey(student.getId())) {
+                throw new StudentAlreadyEnrolledException();
+            } else {
+                List<Course> enrolledCourses = StudentandoCours.getOrDefault(student.getId(), new ArrayList<>());
+                enrolledCourses.add(course);
+                StudentandoCours.put(student.getId(), enrolledCourses);
+                System.out.println(StudentandoCours);
+                System.out.println("He is not enrolled in any course.");
+                System.out.println("Student successfully enrolled in the course.");
+            }
+        } catch (StudentAlreadyEnrolledException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
-
-
-
-
-
-
-
 
 
     @Override
-    public void unsubscribeStudentCourse (Student student, Course course) {
-
-        System.out.println("Ingrese el ID del estudiante: ");
-        student.setId(print.nextInt());
-
-        System.out.println("Ingrese el ID del curso: ");
-        course.setId(print.nextInt());
-        Optional<Course> Search = courses.stream().filter(persona -> persona.getId() == persona.getId()).findFirst();
-
-        if (Search.isPresent()) {
-
-            System.out.println("El codigo ");
-        } else {
-
-            // Verificar si el estudiante ya está en el HashMap
-            List<Course> enrolledCourses = StudentandoCours.getOrDefault(student.getId(), new ArrayList<>());
-            enrolledCourses.remove(course);
-            StudentandoCours.put(student.getId(), enrolledCourses);
+    public void unsubscribeStudentCourse(Student student, Course course) {
+        try {
+            System.out.println("Enter Student ID: ");
+            student.setId(print.nextInt());
+            Optional<Student> SearchName = students.stream().filter(persona -> persona.getId() == persona.getId()).findFirst();
+            SearchName.ifPresent(name -> System.out.println(name));
+            System.out.println("Enter Course ID: ");
+            course.setId(print.nextInt());
+            Optional<Course> Search = courses.stream().filter(persona -> persona.getId() == persona.getId()).findFirst();
+            if (Search.isPresent()) {
+                List<Course> enrolledCourses = StudentandoCours.getOrDefault(student.getId(), new ArrayList<>());
+                enrolledCourses.remove(course);
+                StudentandoCours.put(student.getId(), enrolledCourses);
+                System.out.println(StudentandoCours);
+                System.out.println("the student's course was deleted");
+            } else {
+                throw new StudentNotEnrolledInCourseException();
+            }
+        } catch (StudentNotEnrolledInCourseException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println(StudentandoCours);
-        System.out.println("se removio el estudiante ");
-    }
 
     }
+}
 
