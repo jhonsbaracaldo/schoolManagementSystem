@@ -1,7 +1,7 @@
 package org.example.services;
 
-import org.example.Domain.dntity.Course;
-import org.example.Domain.dntity.Student;
+import org.example.domain.entity.Course;
+import org.example.domain.entity.Student;
 import org.example.dto.enums.Status;
 import org.example.exeception.StudentAlreadyEnrolledException;
 import org.example.exeception.StudentNotEnrolledInCourseException;
@@ -13,9 +13,10 @@ public class AcademicManager implements ServicesAcademicI {
 
     private List<Student> students = new ArrayList<>();
     private List<Course> courses = new ArrayList<>();
+
      private HashMap<Integer, List<Course>> StudentandoCours = new HashMap<Integer, List<Course>>();
      Calendar calendar = Calendar.getInstance();
-    Scanner print = new Scanner(System.in);
+     Scanner print = new Scanner(System.in);
 
     @Override
     public void enrollStudent(Student student) {

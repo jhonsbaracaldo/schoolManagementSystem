@@ -1,7 +1,7 @@
 package org.example.dto;
 
-import org.example.Domain.dntity.Course;
-import org.example.Domain.dntity.Student;
+import org.example.domain.entity.Course;
+import org.example.domain.entity.Student;
 import org.example.services.AcademicManager;
 
 import java.util.Scanner;
