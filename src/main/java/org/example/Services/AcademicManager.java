@@ -13,7 +13,7 @@ public class AcademicManager implements ServicesAcademicI {
 
     private List<Student> students = new ArrayList<>();
     private List<Course> courses = new ArrayList<>();
-    HashMap<Integer, List<Course>> StudentandoCours = new HashMap<Integer, List<Course>>();
+    private HashMap<Integer, List<Course>> StudentandoCours = new HashMap<Integer, List<Course>>();
     Calendar calendar = Calendar.getInstance();
     Scanner print = new Scanner(System.in);
 
