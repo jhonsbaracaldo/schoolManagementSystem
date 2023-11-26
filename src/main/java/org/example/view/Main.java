@@ -1,9 +1,6 @@
-package org.example.View;
+package org.example.view;
 
-import org.example.Dto.Menu;
-
-import java.time.LocalDate;
-import java.util.Scanner;
+import org.example.dto.Menu;
 
 public class Main {
 

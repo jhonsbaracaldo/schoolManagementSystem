@@ -1,4 +1,4 @@
-package org.example.Domain.Entity;
+package org.example.Domain.dntity;
 
 import java.util.List;
 

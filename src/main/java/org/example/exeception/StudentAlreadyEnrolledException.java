@@ -1,4 +1,4 @@
-package org.example.Exeception;
+package org.example.exeception;
 
 public class StudentAlreadyEnrolledException extends Exception {
     public StudentAlreadyEnrolledException() {

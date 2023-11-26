@@ -1,10 +1,10 @@
-package org.example.Services;
+package org.example.services;
 
-import org.example.Domain.Entity.Course;
-import org.example.Domain.Entity.Student;
-import org.example.Dto.Enums.Status;
-import org.example.Exeception.StudentAlreadyEnrolledException;
-import org.example.Exeception.StudentNotEnrolledInCourseException;
+import org.example.Domain.dntity.Course;
+import org.example.Domain.dntity.Student;
+import org.example.dto.enums.Status;
+import org.example.exeception.StudentAlreadyEnrolledException;
+import org.example.exeception.StudentNotEnrolledInCourseException;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -13,8 +13,8 @@ public class AcademicManager implements ServicesAcademicI {
 
     private List<Student> students = new ArrayList<>();
     private List<Course> courses = new ArrayList<>();
-    HashMap<Integer, List<Course>> StudentandoCours = new HashMap<Integer, List<Course>>();
-    Calendar calendar = Calendar.getInstance();
+     private HashMap<Integer, List<Course>> StudentandoCours = new HashMap<Integer, List<Course>>();
+     Calendar calendar = Calendar.getInstance();
     Scanner print = new Scanner(System.in);
 
     @Override

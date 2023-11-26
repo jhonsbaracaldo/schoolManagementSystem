@@ -1,4 +1,4 @@
-package org.example.Domain.Entity;
+package org.example.Domain.dntity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

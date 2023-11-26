@@ -1,4 +1,4 @@
-package org.example.Dto.Enums;
+package org.example.dto.enums;
 
 public enum Status {
         Matriculado("Matriculado"),

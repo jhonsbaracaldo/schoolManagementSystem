@@ -1,10 +1,9 @@
-package org.example.Dto;
+package org.example.dto;
 
-import org.example.Domain.Entity.Course;
-import org.example.Domain.Entity.Student;
-import org.example.Services.AcademicManager;
+import org.example.Domain.dntity.Course;
+import org.example.Domain.dntity.Student;
+import org.example.services.AcademicManager;
 
-import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
